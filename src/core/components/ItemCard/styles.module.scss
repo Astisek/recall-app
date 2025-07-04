@@ -1,0 +1,10 @@
+.root:hover {
+  .actions {
+    opacity: 1;
+  }
+}
+
+.actions {
+  opacity: 0;
+  transition: .2s;
+}

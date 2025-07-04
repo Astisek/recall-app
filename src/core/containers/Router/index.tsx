@@ -1,4 +1,4 @@
-import { routerLinks } from '@/core/data';
+import { routerLinks } from '@/core/data/router';
 import { HomePage } from '@/modules/HomePage/containers/HomePage';
 import { HashRouter, Route, Routes } from 'react-router';
 
