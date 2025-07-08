@@ -3,9 +3,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/core/components/ui/t
 import { HeaderTabsEnum } from '@/core/data/headerTabs';
 import { useTranslation } from 'react-i18next';
 import PasteIcon from '@/assets/icons/paste.svg?react';
-import SettingsIcon from '@/assets/icons/settings.svg?react';
+
 import LogoIcon from '@/assets/icons/logo.svg?react';
 import { Input } from '@/core/components/ui/input';
+import { UserSettings } from '@/shared/containers/UserSettings';
 
 export const Header: React.FC = () => {
   const { t } = useTranslation('shared');
@@ -21,9 +22,7 @@ export const Header: React.FC = () => {
         </TabsList>
         <div className="flex items-center gap-5">
           <p>Astisek</p>
-          <Button variant="ghost">
-            <SettingsIcon />
-          </Button>
+          <UserSettings />
         </div>
         <LogoIcon width={36} className="absolute left-1/2 -translate-x-1/2" />
       </div>

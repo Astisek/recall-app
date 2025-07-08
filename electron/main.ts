@@ -20,7 +20,7 @@ function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     autoHideMenuBar: true,
-    width: 1000,
+    width: 1155,
     // TODO: Set min values
     // minWidth: 300,
     // minHeight: 300,
