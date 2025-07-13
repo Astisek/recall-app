@@ -25,12 +25,12 @@ export const UserSettings: React.FC = () => {
           <DialogTitle>User Settings</DialogTitle>
         </DialogHeader>
         <div className="flex gap-10">
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 w-1/2">
             <Folder />
             <Theme />
             <Language />
           </div>
-          <div>
+          <div className="w-1/2">
             <Account />
           </div>
         </div>

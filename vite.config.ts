@@ -12,7 +12,6 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
     tailwindcss(),
-    tailwindcss(),
     svgr(),
     electron({
       main: {

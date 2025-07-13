@@ -21,8 +21,9 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["./src/*"],
+      "@/electron/*": ["./electron/*"],
+    },
   },
   "include": ["src", "electron", "src/@types"],
   "references": [{ "path": "./tsconfig.node.json" }]

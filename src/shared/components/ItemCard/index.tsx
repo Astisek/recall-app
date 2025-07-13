@@ -2,17 +2,43 @@ import { Card, CardFooter, CardHeader, CardTitle } from '@/core/components/ui/ca
 import { useTranslation } from 'react-i18next';
 import s from './styles.module.scss';
 import { cn } from '@/core/lib/utils';
+import { IFileTreeNode } from '@/electron/models/fileTree';
+import { useMemo } from 'react';
 
 interface ItemCardProps {
   title: string;
-  tagsCount: number;
-  itemsCount: number;
+  directoryChildren?: IFileTreeNode[];
+  isDirectory: boolean;
 }
 
-export const ItemCard: React.FC<ItemCardProps> = ({ itemsCount, tagsCount, title }) => {
+export const ItemCard: React.FC<ItemCardProps> = ({
+  directoryChildren = [],
+  title,
+  isDirectory,
+}) => {
   const { t } = useTranslation('mainPage');
 
-  const itemsText = `${t('itemCard.tag', { count: tagsCount })}, ${t('itemCard.item', { count: itemsCount })}`;
+  const { directories, items } = useMemo(() => {
+    return directoryChildren.reduce(
+      (acc, item) => {
+        // TODO: move to utils
+        const checkItem = (fileTree: IFileTreeNode) => {
+          if (fileTree.isDirectory) {
+            acc.directories++;
+            fileTree.children?.forEach(checkItem);
+          } else {
+            acc.items++;
+          }
+        };
+        checkItem(item);
+
+        return acc;
+      },
+      { items: 0, directories: 0 },
+    );
+  }, [directoryChildren]);
+
+  const itemsText = `${t('itemCard.tag', { count: directories })}, ${t('itemCard.item', { count: items })}`;
 
   return (
     <Card
@@ -30,7 +56,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({ itemsCount, tagsCount, title
         </CardAction> */}
       </CardHeader>
       <CardFooter>
-        <p className="text-secondary">{itemsText}</p>
+        <p className="text-secondary">{isDirectory ? itemsText : ''}</p>
       </CardFooter>
     </Card>
   );

@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { initIpcHandles } from './ipcHandlers';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -24,8 +25,10 @@ function createWindow() {
     // TODO: Set min values
     // minWidth: 300,
     // minHeight: 300,
+
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
+      contextIsolation: true,
     },
   });
 
@@ -38,6 +41,8 @@ function createWindow() {
   } else {
     win.loadFile(path.join(RENDERER_DIST, 'index.html'));
   }
+
+  initIpcHandles();
 }
 
 app.on('window-all-closed', () => {
