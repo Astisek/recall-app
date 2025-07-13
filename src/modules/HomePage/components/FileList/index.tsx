@@ -8,8 +8,8 @@ interface FileListProps {
 export const FileList: React.FC<FileListProps> = ({ list }) => {
   return (
     <>
-      {list.map(({ name, isDirectory, children }) => (
-        <ItemCard title={name} directoryChildren={children} isDirectory={isDirectory} />
+      {list.map(({ name, isDirectory, children, path }) => (
+        <ItemCard title={name} directoryChildren={children} isDirectory={isDirectory} key={path} />
       ))}
     </>
   );
