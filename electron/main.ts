@@ -22,9 +22,8 @@ function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     autoHideMenuBar: true,
     width: 1155,
-    // TODO: Set min values
-    // minWidth: 300,
-    // minHeight: 300,
+    minWidth: 800,
+    minHeight: 500,
 
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),

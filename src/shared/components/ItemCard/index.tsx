@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import s from './styles.module.scss';
 import { cn } from '@/core/lib/utils';
 import { IFileTreeNode } from '@/electron/models/fileTree';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 
 interface ItemCardProps {
   title: string;
@@ -16,12 +17,18 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   title,
   isDirectory,
 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation('mainPage');
+
+  const handleOpenCard = useCallback(
+    () => navigate(`${location.pathname}${title}/`),
+    [location.pathname, navigate, title],
+  );
 
   const { directories, items } = useMemo(() => {
     return directoryChildren.reduce(
       (acc, item) => {
-        // TODO: move to utils
         const checkItem = (fileTree: IFileTreeNode) => {
           if (fileTree.isDirectory) {
             acc.directories++;
@@ -42,10 +49,10 @@ export const ItemCard: React.FC<ItemCardProps> = ({
 
   return (
     <Card
-      className={cn(
-        'cursor-pointer justify-between hover:shadow-primary transition-shadow',
-        s.root,
-      )}
+      className={cn('justify-between hover:shadow-primary transition-shadow', s.root, {
+        ['cursor-pointer']: isDirectory,
+      })}
+      onClick={isDirectory ? handleOpenCard : undefined}
     >
       <CardHeader>
         <CardTitle>{title}</CardTitle>

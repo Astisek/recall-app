@@ -1,3 +1,3 @@
 export const routerLinks = {
-  home: '/',
+  home: (path = '') => `/files/${path}`,
 };

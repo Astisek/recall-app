@@ -5,4 +5,7 @@ export const enMainPage = {
     tag_one: '{{count}} playlist',
     tag_other: '{{count}} playlists',
   },
+  list: {
+    root: 'Root directory',
+  },
 };
