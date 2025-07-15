@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+.root:hover .actions {
+  @apply translate-y-0 opacity-100 pointer-events-auto;
+
+}
+
+.actions {
+  @apply absolute inset-x-0 bottom-0 flex justify-center gap-2 py-3
+         backdrop-blur-sm translate-y-full opacity-0 pointer-events-none
+         transform-gpu transition-opacity duration-200 ease-out;
+  background-color: rgb(var(--background) / 0.9);
+}

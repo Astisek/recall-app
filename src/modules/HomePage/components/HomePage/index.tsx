@@ -2,11 +2,11 @@ import { Header } from '@/core/containers/Header';
 import { ScrollArea } from '@/core/components/ui/scroll-area';
 import { FileList } from '@/modules/HomePage/components/FileList';
 import { useFileTreeStore } from '@/stores/useFileTreeStore';
-import { FileListHeader } from '@/modules/HomePage/containers/FileListHeader';
 import { useMemo } from 'react';
 import { useLocation } from 'react-router';
 import { IFileTreeNode } from '@/electron/models/fileTree';
 import { parseFilesUrl } from '@/modules/HomePage/utils/parseFilesUrl';
+import { FileListHeader } from '@/modules/HomePage/components/FileListHeader';
 
 export const HomePage: React.FC = () => {
   const { tree } = useFileTreeStore();
