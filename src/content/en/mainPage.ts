@@ -8,4 +8,10 @@ export const enMainPage = {
   list: {
     root: 'Root directory',
   },
+  alerts: {
+    removeItemTitle: 'Removing folder/file',
+    removeItemDesc: 'Are you sure you want to delete the folder/file?',
+    removeAccept: 'Delete',
+    removeCancel: 'Cancel',
+  },
 };

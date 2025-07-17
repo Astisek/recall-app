@@ -5,4 +5,5 @@ export enum ElectronEventEnum {
   SetDirectoryTree = 'user-settings:set-directory-tree',
   ParseDirectoryTree = 'user-settings:parse-directory-tree',
   GetStores = 'store:get-store',
+  RemoveItem = 'directory:remove-item',
 }

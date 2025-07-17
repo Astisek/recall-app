@@ -5,4 +5,9 @@ export const enShared = {
     searchInputPlaceholder: 'Enter content url (youtube, soundcloud)...',
     add: 'Add',
   },
+  selectMedia: {
+    selectDirectory: 'Select Directory',
+    addMedia: 'Add Media',
+    selectedDirectory: 'Selected directory:',
+  },
 };

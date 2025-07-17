@@ -2,9 +2,7 @@ import { IFileTreeNode } from '@/electron/models/fileTree';
 import { store } from './';
 
 export const userSettingsStore = {
-  getDirectoryPath: () => {
-    return store.get('userSettings:directoryPath') ?? '';
-  },
+  getDirectoryPath: () => store.get('userSettings:directoryPath') ?? '',
   setDirectoryPath: (path: string) => {
     store.set('userSettings:directoryPath', path);
   },
@@ -12,7 +10,5 @@ export const userSettingsStore = {
   setDirectoryTree: (tree: IFileTreeNode[]) => {
     store.set('userSettings:directoryTree', tree);
   },
-  getDirectoryTree: () => {
-    return store.get('userSettings:directoryTree') ?? [];
-  },
+  getDirectoryTree: () => store.get('userSettings:directoryTree') ?? [],
 };

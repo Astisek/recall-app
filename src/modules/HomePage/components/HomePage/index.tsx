@@ -1,4 +1,4 @@
-import { Header } from '@/core/containers/Header';
+import { Header } from '@/core/components/Header';
 import { ScrollArea } from '@/core/components/ui/scroll-area';
 import { FileList } from '@/modules/HomePage/components/FileList';
 import { useFileTreeStore } from '@/stores/useFileTreeStore';
@@ -16,9 +16,12 @@ export const HomePage: React.FC = () => {
 
   const currentTree = useMemo(
     () =>
-      pathnameDirectories.reduce<IFileTreeNode[] | undefined>((acc, item) => {
-        return acc?.find(({ name }) => name === item)?.children;
-      }, tree) ?? [],
+      (
+        pathnameDirectories.reduce<IFileTreeNode[] | undefined>(
+          (acc, item) => acc?.find(({ name }) => name === item)?.children,
+          tree,
+        ) ?? []
+      ).sort((prev, next) => next.name.lastIndexOf(prev.name)),
     [pathnameDirectories, tree],
   );
 

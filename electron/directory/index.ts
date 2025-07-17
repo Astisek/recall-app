@@ -2,7 +2,8 @@ import { userSettingsStore } from '../store/userSettings.store';
 import { ElectronEventEnum } from '../data/events';
 import { BrowserWindow, dialog, ipcMain } from 'electron';
 import { readDirectory } from '../utils/readDirectory';
-import { IFileTreeNode } from '@/electron/models/fileTree';
+import { IFileTreeNode } from '../models/fileTree';
+import fs from 'fs/promises';
 
 export const init = () => {
   ipcMain.handle(ElectronEventEnum.SelectDirectory, async () => {
@@ -25,18 +26,29 @@ export const init = () => {
 
       return tree;
     } catch (e) {
-      throw new Error('Something wrong!');
+      if (e instanceof Error) {
+        throw new Error(`Error: ${e.message}`);
+      }
     }
   });
 
-  ipcMain.handle(ElectronEventEnum.GetDirectory, () => {
-    return userSettingsStore.getDirectoryPath();
-  });
+  ipcMain.handle(ElectronEventEnum.GetDirectory, () => userSettingsStore.getDirectoryPath());
 
   ipcMain.handle(ElectronEventEnum.SetDirectory, (_, path: string) => {
     userSettingsStore.setDirectoryPath(path);
   });
+
   ipcMain.handle(ElectronEventEnum.SetDirectoryTree, (_, tree: IFileTreeNode[]) => {
     userSettingsStore.setDirectoryTree(tree);
+  });
+
+  ipcMain.handle(ElectronEventEnum.RemoveItem, async (_, tree: IFileTreeNode) => {
+    try {
+      await fs.rm(tree.path, { force: true, recursive: true });
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new Error(`Error: ${e.message}`);
+      }
+    }
   });
 };

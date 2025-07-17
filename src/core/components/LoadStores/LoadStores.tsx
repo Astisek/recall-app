@@ -1,23 +1,25 @@
 import { ElectronEventEnum } from '@/electron/data/events';
 import { IElectronClientStore } from '@/electron/models/store';
-import { useFileTreeStore } from '@/stores/useFileTreeStore';
+import { useUpdateDirectoryTree } from '@/shared/hooks/useUpdateDirectoryTree';
 import { useUserSettingsStore } from '@/stores/useUserStore';
 import { useEffect } from 'react';
 
 export const LoadStores = () => {
-  const { setTree } = useFileTreeStore();
-  const { updateFolderPath } = useUserSettingsStore();
+  const updateDirectoryTree = useUpdateDirectoryTree();
+  const { updateDirectoryPath } = useUserSettingsStore();
 
   useEffect(() => {
     (async () => {
       const {
-        userSettings: { directoryPath, directoryTree },
+        userSettings: { directoryPath },
       } = (await window.ipcRenderer.invoke(ElectronEventEnum.GetStores)) as IElectronClientStore;
 
-      setTree(directoryTree);
-      updateFolderPath(directoryPath);
+      updateDirectoryPath(directoryPath);
+
+      await updateDirectoryTree(directoryPath);
     })();
-  }, [setTree, updateFolderPath]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return null;
 };
