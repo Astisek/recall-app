@@ -2,7 +2,18 @@ import * as React from 'react';
 
 import { cn } from '@/core/lib/utils';
 
-function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
+interface InputProps extends Omit<React.ComponentProps<'input'>, 'onChange'> {
+  onChange?: (val: string) => void;
+}
+
+function Input({ className, type, onChange, ...props }: InputProps) {
+  const handleChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e.target.value);
+    },
+    [onChange],
+  );
+
   return (
     <input
       type={type}
@@ -13,6 +24,7 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
         'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
         className,
       )}
+      onChange={handleChange}
       {...props}
     />
   );

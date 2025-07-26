@@ -1,4 +1,3 @@
-import { IFileTreeNode } from '@/electron/models/fileTree';
 import { store } from './';
 
 export const userSettingsStore = {
@@ -7,8 +6,6 @@ export const userSettingsStore = {
     store.set('userSettings:directoryPath', path);
   },
 
-  setDirectoryTree: (tree: IFileTreeNode[]) => {
-    store.set('userSettings:directoryTree', tree);
-  },
-  getDirectoryTree: () => store.get('userSettings:directoryTree') ?? [],
+  getYoutubeCookie: () => store.get('userSettings:cookie') || '',
+  setYoutubeCookie: (cookie: string) => store.set('userSettings:cookie', cookie),
 };

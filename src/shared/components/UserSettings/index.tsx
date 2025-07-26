@@ -5,12 +5,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/core/components/ui/dialog';
-import { Account } from './Account';
 import { Folder } from './Folder';
 import { Language } from './Language';
 import { Theme } from './Theme';
 import { Button } from '@/core/components/ui/button';
 import SettingsIcon from '@/assets/icons/settings.svg?react';
+import { Cookie } from './Cookie';
 
 export const UserSettings: React.FC = () => (
   <Dialog>
@@ -19,7 +19,7 @@ export const UserSettings: React.FC = () => (
         <SettingsIcon />
       </Button>
     </DialogTrigger>
-    <DialogContent className="min-w-9/12">
+    <DialogContent className="min-w-[850px]">
       <DialogHeader>
         <DialogTitle>User Settings</DialogTitle>
       </DialogHeader>
@@ -30,7 +30,8 @@ export const UserSettings: React.FC = () => (
           <Language />
         </div>
         <div className="w-1/2">
-          <Account />
+          {/* <Account /> */}
+          <Cookie />
         </div>
       </div>
     </DialogContent>

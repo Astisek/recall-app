@@ -14,7 +14,7 @@ export const init = () => {
     (): IElectronClientStore => ({
       userSettings: {
         directoryPath: userSettingsStore.getDirectoryPath(),
-        directoryTree: userSettingsStore.getDirectoryTree(),
+        cookie: userSettingsStore.getYoutubeCookie(),
       },
     }),
   );

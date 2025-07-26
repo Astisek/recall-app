@@ -21,6 +21,7 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/jsx-key": "error",
     "react/prop-types": "off",
+    "no-case-declarations": "off",
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {

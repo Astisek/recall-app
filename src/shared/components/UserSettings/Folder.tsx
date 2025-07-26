@@ -1,6 +1,7 @@
 import { Button } from '@/core/components/ui/button';
 import { Input } from '@/core/components/ui/input';
 import { Label } from '@/core/components/ui/label';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/core/components/ui/tooltip';
 import { ElectronEventEnum } from '@/electron/data/events';
 import { useUpdateDirectoryTree } from '@/shared/hooks/useUpdateDirectoryTree';
 import { useUserSettingsStore } from '@/stores/useUserStore';
@@ -8,21 +9,22 @@ import { useTranslation } from 'react-i18next';
 
 export const Folder: React.FC = () => {
   const updateDirectoryTree = useUpdateDirectoryTree();
-  const { directoryPath, updateDirectoryPath } = useUserSettingsStore();
+  const { directoryPath, setDirectoryPath } = useUserSettingsStore();
   const { t } = useTranslation('settings');
 
-  const handleClickDirectoryPicker = async () => {
-    try {
-      const directoryPath: string = await window.ipcRenderer.invoke(
-        ElectronEventEnum.SelectDirectory,
-      );
-      updateDirectoryPath(directoryPath);
-      await window.ipcRenderer.invoke(ElectronEventEnum.SetDirectory, directoryPath);
+  const handleOpenDirectory = () =>
+    window.ipcRenderer.invoke(ElectronEventEnum.OpenDirectory, directoryPath);
 
-      await updateDirectoryTree();
-    } catch (e) {
-      // TODO: Add something (noification)
-    }
+  const handleClickDirectoryPicker = async () => {
+    const directoryPath: string = await window.ipcRenderer.invoke(
+      ElectronEventEnum.SelectDirectory,
+    );
+    if (!directoryPath) return;
+
+    setDirectoryPath(directoryPath);
+    await window.ipcRenderer.invoke(ElectronEventEnum.SetDirectory, directoryPath);
+
+    await updateDirectoryTree(directoryPath);
   };
 
   return (
@@ -30,11 +32,24 @@ export const Folder: React.FC = () => {
       <Label htmlFor="email">{t('folder.label')}</Label>
       <p className="text-muted-foreground text-sm">{t('folder.desc')}</p>
       <div className="flex items-center gap-2">
-        <Input placeholder={t('folder.placeholder')} disabled value={directoryPath} />
+        <Tooltip>
+          <TooltipTrigger className="w-full">
+            <Input placeholder={t('folder.placeholder')} disabled value={directoryPath} />
+          </TooltipTrigger>
+          <TooltipContent>{directoryPath}</TooltipContent>
+        </Tooltip>
+
         <Button variant="outline" onClick={handleClickDirectoryPicker}>
           {t('folder.select')}
         </Button>
       </div>
+      {!!directoryPath && (
+        <div className="mt-1">
+          <Button onClick={handleOpenDirectory} variant="outline">
+            {t('folder.openDirectory')}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

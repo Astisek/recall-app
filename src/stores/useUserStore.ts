@@ -2,13 +2,21 @@ import { create } from 'zustand';
 
 interface IUserSettingsStore {
   directoryPath: string;
-  updateDirectoryPath: (folderPath: string) => void;
+  cookie: string;
+  setDirectoryPath: (folderPath: string) => void;
+  setCookie: (folderPath: string) => void;
+  settingsIsCorrect: () => boolean;
 }
 
-export const useUserSettingsStore = create<IUserSettingsStore>((set) => ({
+export const useUserSettingsStore = create<IUserSettingsStore>((set, get) => ({
   directoryPath: '',
-  updateDirectoryPath: (directoryPath) =>
+  cookie: '',
+
+  setCookie: (cookie: string) => set({ cookie }),
+  setDirectoryPath: (directoryPath) =>
     set({
       directoryPath,
     }),
+
+  settingsIsCorrect: () => !!get().directoryPath,
 }));

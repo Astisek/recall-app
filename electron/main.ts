@@ -2,6 +2,7 @@ import { app, BrowserWindow } from 'electron';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { initIpcHandles } from './ipcHandlers';
+import { Notification } from './notifications';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -21,9 +22,10 @@ function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     autoHideMenuBar: true,
+
     width: 1155,
     minWidth: 800,
-    minHeight: 500,
+    minHeight: 630,
 
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
@@ -42,6 +44,7 @@ function createWindow() {
   }
 
   initIpcHandles();
+  notifications.setWindow(win);
 }
 
 app.on('window-all-closed', () => {
@@ -58,3 +61,5 @@ app.on('activate', () => {
 });
 
 app.whenReady().then(createWindow);
+
+export const notifications = new Notification();

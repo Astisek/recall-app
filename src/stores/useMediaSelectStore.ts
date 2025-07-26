@@ -3,7 +3,7 @@ import { create } from 'zustand';
 
 interface IMediaSelectStore {
   selectedTree?: IFileTreeNode;
-  setSelectedTree: (tree: IFileTreeNode) => void;
+  setSelectedTree: (tree?: IFileTreeNode) => void;
 }
 
 export const useMediaSelectStore = create<IMediaSelectStore>((set) => ({

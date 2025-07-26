@@ -1,7 +1,8 @@
-import { init as initDirectoryHandlers } from './directory';
+import { init as initDirectoryEvents } from './directory';
 import { init as initStore } from './store';
-
+import { init as youtubeEvents } from './mediaDownload/youtube';
 export const initIpcHandles = () => {
-  initDirectoryHandlers();
+  initDirectoryEvents();
   initStore();
+  youtubeEvents();
 };

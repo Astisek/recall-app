@@ -8,6 +8,6 @@ export interface IElectronStore {
 export interface IElectronClientStore {
   userSettings: {
     directoryPath: string;
-    directoryTree: IFileTreeNode[];
+    cookie: string;
   };
 }
