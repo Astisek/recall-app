@@ -1,8 +1,9 @@
 import { createContext } from 'react';
+import { ThemeEnum } from '@/shared/data/settings';
 import { ThemeProviderState } from '@/shared/models/theme';
 
 const initialState: ThemeProviderState = {
-  theme: 'system',
+  theme: ThemeEnum.System,
   setTheme: () => null,
 };
 

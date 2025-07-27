@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ThemeProviderContext } from '@/core/data/themeContext';
-import { Theme } from '@/shared/models/theme';
+import { ThemeEnum } from '@/shared/data/settings';
 
 export type ThemeProviderProps = {
   children: React.ReactNode;
-  defaultTheme?: Theme;
+  defaultTheme?: ThemeEnum;
   storageKey?: string;
 };
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
-  defaultTheme = 'system',
+  defaultTheme = ThemeEnum.System,
   storageKey = 'theme',
   ...props
 }) => {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
+  const [theme, setTheme] = useState<ThemeEnum>(
+    () => (localStorage.getItem(storageKey) as ThemeEnum) || defaultTheme,
   );
 
   useEffect(() => {
@@ -35,13 +35,16 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     root.classList.add(theme);
   }, [theme]);
 
-  const value = {
-    theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
-    },
-  };
+  const value = useMemo(
+    () => ({
+      theme,
+      setTheme: (theme: ThemeEnum) => {
+        localStorage.setItem(storageKey, theme);
+        setTheme(theme);
+      },
+    }),
+    [storageKey, theme],
+  );
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>

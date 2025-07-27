@@ -29,7 +29,7 @@ export const DirectoryBreadcrumbs: React.FC<DirectoryBreadcrumbsProps> = ({
   const { t } = useTranslation('mainPage');
 
   const { currentLink, hiddenElements, homeLink, prevLink } = useMemo(() => {
-    const items = pathnameDirectories.reduce(
+    const items = pathnameDirectories.reduce<{ link: string; title: string }[]>(
       (acc, path) => {
         acc.push({ link: `${last(acc)?.link}${path}/`, title: path });
 
