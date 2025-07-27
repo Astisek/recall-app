@@ -10,7 +10,7 @@ export const NotificationControl: React.FC = () => {
   const eventsRef = useRef<Map<ElectronNotificationEnum, string | number>>(new Map());
 
   const showElectronNotification = useCallback(
-    (_: unknown, key: ElectronNotificationEnum, data?: string) => {
+    (_: unknown, key: ElectronNotificationEnum, data: string) => {
       if (eventsRef.current.get(key)) return;
 
       switch (key) {
@@ -42,6 +42,12 @@ export const NotificationControl: React.FC = () => {
         case ElectronNotificationEnum.DownloadComplete:
           showNotification({
             title: t('mainPage.downloadComplete'),
+            category: NotificationCategoryEnum.Success,
+          });
+          break;
+        case ElectronNotificationEnum.AppUpdated:
+          showNotification({
+            title: t('electron.updated', { ver: data }),
             category: NotificationCategoryEnum.Success,
           });
           break;

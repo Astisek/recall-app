@@ -2,6 +2,7 @@ export const ruNotification = {
   'electron.mediaDownloading': 'Загрузка медиа...',
   'electron.mediaProcessing': 'Обработка медиа...',
   'electron.error': 'Ошибка!',
+  'electron.updated': 'Приложение обновлено до {{ver}}',
 
   'directory.syncing': 'Идёт синхронизация...',
   'directory.selectFolderTitle': 'Требуется выбор корневой папки',
@@ -13,7 +14,7 @@ export const ruNotification = {
   'directory.directoryChanged': 'Папка изменена',
 
   'settings.themeChanged': 'Тема изменена',
-  'settings.langChanged': 'Язык установлен на русский',
+  'settings.langChanged': 'Язык изменён на русский',
   'settings.cookieSaved': 'Cookie сохранены',
 
   'mainPage.incorrectLinkTitle': 'Неверная ссылка',

@@ -21,4 +21,5 @@ export enum ElectronNotificationEnum {
   MediaProcessing = '2000',
   Error = '3000',
   DownloadComplete = '4000',
+  AppUpdated = '5000',
 }

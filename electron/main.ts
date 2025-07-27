@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BrowserWindow, app } from 'electron';
+import { AppAutoUpdater } from './autoupdate';
 import { initIpcHandles } from './ipcHandlers';
 import { Notification } from './notifications';
 
@@ -20,7 +21,7 @@ let win: BrowserWindow | null;
 
 function createWindow() {
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    icon: path.join(process.env.VITE_PUBLIC, 'logo.png'),
     autoHideMenuBar: true,
 
     width: 1155,
@@ -36,6 +37,7 @@ function createWindow() {
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', new Date().toLocaleString());
   });
+  win.removeMenu();
 
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL);
@@ -45,6 +47,7 @@ function createWindow() {
 
   initIpcHandles();
   notifications.setWindow(win);
+  new AppAutoUpdater();
 }
 
 app.on('window-all-closed', () => {

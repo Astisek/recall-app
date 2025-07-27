@@ -1,12 +1,13 @@
 // @see - https://www.electron.build/configuration/configuration
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-  "appId": "YourAppID",
+  "appId": "com.astisek.recall",
   "asar": true,
-  "productName": "YourAppName",
+  "productName": "Recall",
   "directories": {
     "output": "release/${version}"
   },
+  "icon": "public/logo",
   "files": [
     "dist",
     "dist-electron",
@@ -18,6 +19,10 @@
       "dmg"
     ],
     "artifactName": "${productName}-Mac-${version}-Installer.${ext}"
+  },
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
   },
   "win": {
     "target": [

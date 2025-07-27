@@ -1,5 +1,5 @@
 {
-  "name": "recall-app",
+  "name": "recall",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -9,6 +9,9 @@
     "lint": "eslint --fix src/**/*.{ts,tsx} electron/**/*.ts --report-unused-disable-directives --max-warnings 0 ",
     "preview": "vite preview"
   },
+  "repository": "https://github.com/Astisek/recall-app",
+  "author": "Astisek@hotmail.com",
+  "description": "Quickly download music from YouTube and distribute it into folders",
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-dialog": "^1.1.14",
@@ -23,6 +26,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "electron-store": "^10.1.0",
+    "electron-updater": "^6.6.2",
     "framer-motion": "^12.23.9",
     "i18next": "^25.3.0",
     "i18next-browser-languagedetector": "^8.2.0",

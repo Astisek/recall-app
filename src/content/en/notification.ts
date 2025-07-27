@@ -2,6 +2,7 @@ export const enNotification = {
   'electron.mediaDownloading': 'Downloading media...',
   'electron.mediaProcessing': 'Processing media...',
   'electron.error': 'Error!',
+  'electron.updated': 'App updated to {{ver}}',
 
   'directory.syncing': 'Sync in progress...',
   'directory.selectFolderTitle': 'Folder selection required',
