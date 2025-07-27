@@ -1,5 +1,5 @@
-import { userSettingsStore } from '../../store/userSettings.store';
 import Innertube from 'youtubei.js';
+import { userSettingsStore } from '../../store/userSettings.store';
 
 class Youtube {
   private innertube?: Innertube;

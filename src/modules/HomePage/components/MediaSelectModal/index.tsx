@@ -1,16 +1,15 @@
-import { Drawer, DrawerContent } from '@/core/components/ui/drawer';
 import { useEffect, useState } from 'react';
-import { VideoInfo } from '@/modules/HomePage/components/MediaSelectModal/VideoInfo';
-import { DirectorySelector } from '@/modules/HomePage/components/MediaSelectModal/DirectorySelector';
-import { IUrlData } from '@/modules/HomePage/models';
-import { fetchMediaInfo } from '@/modules/HomePage/utils/fetchMediaInfo';
+import { Drawer, DrawerContent } from '@/core/components/ui/drawer';
 import { IVideoInfo } from '@/electron/models/youtube';
 import { DirectoryNodeFooter } from '@/modules/HomePage/components/MediaSelectModal/DirectoryNodeFooter';
+import { DirectorySelector } from '@/modules/HomePage/components/MediaSelectModal/DirectorySelector';
+import { VideoInfo } from '@/modules/HomePage/components/MediaSelectModal/VideoInfo';
+import { IUrlData } from '@/modules/HomePage/models';
 import { downloadMedia } from '@/modules/HomePage/utils/downloadMedia';
-import { useMediaSelectStore } from '@/stores/useMediaSelectStore';
-import { useUpdateDirectoryTree } from '@/shared/hooks/useUpdateDirectoryTree';
+import { fetchMediaInfo } from '@/modules/HomePage/utils/fetchMediaInfo';
 import { useNotification } from '@/shared/hooks/useNotification';
-import { useTranslation } from 'react-i18next';
+import { useUpdateDirectoryTree } from '@/shared/hooks/useUpdateDirectoryTree';
+import { useMediaSelectStore } from '@/stores/useMediaSelectStore';
 
 interface MediaSelectModalProps {
   onClose: () => void;
@@ -20,8 +19,7 @@ interface MediaSelectModalProps {
 export const MediaSelectModal: React.FC<MediaSelectModalProps> = ({ onClose, urlData }) => {
   const updateDirectoryTree = useUpdateDirectoryTree();
   const { selectedTree, setSelectedTree } = useMediaSelectStore();
-  const { showNotification } = useNotification();
-  const { t } = useTranslation('notification');
+  const { showErrorNotification } = useNotification();
 
   const [isLoading, setIsLoading] = useState(false);
   const [videoInfo, setVideoInfo] = useState<IVideoInfo>();
@@ -29,21 +27,30 @@ export const MediaSelectModal: React.FC<MediaSelectModalProps> = ({ onClose, url
 
   useEffect(() => {
     (async () => {
-      setIsLoading(true);
-      const videoInfo = await fetchMediaInfo(urlData);
+      try {
+        setIsLoading(true);
+        const videoInfo = await fetchMediaInfo(urlData);
 
-      setVideoInfo(videoInfo);
-      setIsLoading(false);
+        setVideoInfo(videoInfo);
+        setIsLoading(false);
+      } catch (e) {
+        showErrorNotification(e);
+      }
     })();
 
     return setSelectedTree;
-  }, [onClose, setSelectedTree, urlData]);
+  }, [onClose, setSelectedTree, showErrorNotification, urlData]);
 
   const handleAddMedia = async () => {
-    setIsDownloading(true);
-    await downloadMedia(urlData, videoInfo, selectedTree?.path);
-    await updateDirectoryTree();
-    onClose();
+    try {
+      setIsDownloading(true);
+      await downloadMedia(urlData, videoInfo, selectedTree?.path);
+      await updateDirectoryTree();
+    } catch (e) {
+      showErrorNotification(e);
+    } finally {
+      onClose();
+    }
   };
 
   return (

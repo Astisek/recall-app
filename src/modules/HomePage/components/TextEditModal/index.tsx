@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Button } from '@/core/components/ui/button';
 import {
   Dialog,
@@ -8,7 +9,6 @@ import {
   DialogTitle,
 } from '@/core/components/ui/dialog';
 import { Input } from '@/core/components/ui/input';
-import { useState } from 'react';
 
 interface EditItemProps {
   onEdit: (name: string) => Promise<void>;
@@ -35,6 +35,13 @@ export const TextEditModal: React.FC<EditItemProps> = ({
 }) => {
   const [inputValue, setInputValue] = useState(defaultValue);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setInputValue(defaultValue);
+      setIsLoading(false);
+    }
+  }, [defaultValue, isOpen]);
 
   const handleEdit = async () => {
     setIsLoading(true);

@@ -1,6 +1,6 @@
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/core/components/ui/button';
 import { Label } from '@/core/components/ui/label';
-import { useTranslation } from 'react-i18next';
 
 export const Account: React.FC = () => {
   const { t } = useTranslation('settings');

@@ -1,5 +1,5 @@
-import { IFileTreeNode } from '@/electron/models/fileTree';
 import { create } from 'zustand';
+import { IFileTreeNode } from '@/electron/models/fileTree';
 
 interface IMediaSelectStore {
   selectedTree?: IFileTreeNode;

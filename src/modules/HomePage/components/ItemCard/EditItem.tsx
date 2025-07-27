@@ -1,8 +1,8 @@
-import { Button } from '@/core/components/ui/button';
-import { TextEditModal } from '@/modules/HomePage/components/TextEditModal';
 import { Edit2 } from 'lucide-react';
 import { useReducer } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/core/components/ui/button';
+import { TextEditModal } from '@/modules/HomePage/components/TextEditModal';
 
 interface EditItemProps {
   onEdit: (name: string) => Promise<void>;

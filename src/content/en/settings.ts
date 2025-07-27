@@ -1,38 +1,33 @@
 export const enSettings = {
   userSettings: 'User Settings',
-  folder: {
-    label: 'Music folder',
-    desc: 'The folder in which playlists and tracks will be synchronized',
-    placeholder: 'Path to folder',
-    select: 'Select',
-    openDirectory: 'Open selected directory',
-  },
-  theme: {
-    theme: 'Theme',
-    dark: 'Dark',
-    light: 'Light',
-  },
-  language: {
-    language: 'Language',
-    ru: 'RU',
-    en: 'EN',
-  },
-  auth: {
-    auth: 'Authorization',
-    signIn: 'Sign In',
-    signUp: 'Sign Up',
 
-    sync: 'Synchronize',
-    autoSync: 'Auto sync',
-  },
-  cookie: {
-    label: 'YouTube Cookie',
-    tooltipTitle: 'How to get your YouTube cookie:',
-    tooltipDesc1: 'Log into YouTube',
-    tooltipDesc2: 'Open DevTools (F12)',
-    tooltipDesc3: 'Go to the Network tab',
-    tooltipDesc4: 'Copy the value of the Cookie header from any request to youtube.com',
-    tooltipPlaceholder: 'Paste your YouTube cookie here',
-    save: 'Save',
-  },
+  'folder.label': 'Music folder',
+  'folder.desc': 'The folder in which playlists and tracks will be synchronized',
+  'folder.placeholder': 'Path to folder',
+  'folder.select': 'Select',
+  'folder.openDirectory': 'Open selected directory',
+
+  'theme.theme': 'Theme',
+  'theme.dark': 'Dark',
+  'theme.light': 'Light',
+  'theme.system': 'System',
+
+  'language.language': 'Language',
+  'language.ru': 'RU',
+  'language.en': 'EN',
+
+  'auth.auth': 'Authorization',
+  'auth.signIn': 'Sign In',
+  'auth.signUp': 'Sign Up',
+  'auth.sync': 'Synchronize',
+  'auth.autoSync': 'Auto sync',
+
+  'cookie.label': 'YouTube Cookie',
+  'cookie.tooltipTitle': 'How to get your YouTube cookie:',
+  'cookie.tooltipDesc1': 'Log into YouTube',
+  'cookie.tooltipDesc2': 'Open DevTools (F12)',
+  'cookie.tooltipDesc3': 'Go to the Network tab',
+  'cookie.tooltipDesc4': 'Copy the value of the Cookie header from any request to youtube.com',
+  'cookie.tooltipPlaceholder': 'Paste your YouTube cookie here',
+  'cookie.save': 'Save',
 };

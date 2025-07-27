@@ -1,15 +1,13 @@
-import { BinariesEnum } from '../models/binaries';
-import { getBinariesPath } from './getBinaries';
 import { spawn } from 'child_process';
 import fs from 'fs/promises';
+import { getBinariesPath } from './getBinaries';
+import { BinariesEnum } from '../models/binaries';
 
 class Ffmpeg {
   private ffmpegPath = getBinariesPath(BinariesEnum.Ffmpeg);
 
   mp4ToMp3 = (mp4Path: string, mp3Path: string) =>
     new Promise<void>((res, rej) => {
-      console.log(this.ffmpegPath, mp4Path, mp3Path);
-
       const ffmpeg = spawn(this.ffmpegPath, [
         '-i',
         mp4Path,

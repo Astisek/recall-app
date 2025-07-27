@@ -1,13 +1,10 @@
 export const enShared = {
-  header: {
-    url: 'URL',
-    search: 'Search',
-    searchInputPlaceholder: 'Enter content url (youtube, soundcloud)...',
-    add: 'Add',
-  },
-  selectMedia: {
-    selectDirectory: 'Select Directory',
-    addMedia: 'Add Media',
-    selectedDirectory: 'Selected directory:',
-  },
+  'header.url': 'URL',
+  'header.search': 'Search',
+  'header.searchInputPlaceholder': 'Enter content url (youtube)...',
+  'header.add': 'Add',
+
+  'selectMedia.selectDirectory': 'Select Directory',
+  'selectMedia.addMedia': 'Add Media',
+  'selectMedia.selectedDirectory': 'Selected directory:',
 };

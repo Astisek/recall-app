@@ -1,7 +1,7 @@
-import { availableFileExts } from '../data/files';
-import { IFileTreeNode } from '../models/fileTree';
 import fs from 'fs/promises';
 import path from 'path';
+import { availableFileExts } from '../data/files';
+import { IFileTreeNode } from '../models/fileTree';
 
 export const readDirectory = async (dirPath: string): Promise<IFileTreeNode[]> => {
   const entries = await fs.readdir(dirPath, { withFileTypes: true });

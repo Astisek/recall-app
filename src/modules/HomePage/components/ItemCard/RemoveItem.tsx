@@ -1,3 +1,6 @@
+import { Trash } from 'lucide-react';
+import { useReducer, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -8,9 +11,6 @@ import {
   AlertDialogTrigger,
 } from '@/core/components/ui/alert-dialog';
 import { Button } from '@/core/components/ui/button';
-import { Trash } from 'lucide-react';
-import { useReducer, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 interface RemoveItemProps {
   onDelete: () => Promise<void>;

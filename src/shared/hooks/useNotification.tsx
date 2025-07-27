@@ -1,13 +1,17 @@
+import { last } from 'lodash';
+import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
+import { NotificationLoader } from '@/shared/components/NotificationLoader';
 import {
   INotification,
   NotificationCategoryEnum,
   NotificationVariantEnum,
 } from '@/shared/models/notification';
-import { useCallback } from 'react';
-import { toast } from 'sonner';
-import { NotificationLoader } from '@/shared/components/NotificationLoader';
 
 export const useNotification = () => {
+  const { t } = useTranslation('notification');
+
   const showNotification = useCallback(
     ({
       title,
@@ -37,7 +41,18 @@ export const useNotification = () => {
     [],
   );
 
+  const showErrorNotification = useCallback(
+    (error: unknown) =>
+      error instanceof Error &&
+      showNotification({
+        title: t('electron.error'),
+        description: last(error.message.split("':")),
+        category: NotificationCategoryEnum.Error,
+      }),
+    [showNotification, t],
+  );
+
   const removeNotification = useCallback((id: string | number) => toast.dismiss(id), []);
 
-  return { showNotification, removeNotification };
+  return { showNotification, removeNotification, showErrorNotification };
 };

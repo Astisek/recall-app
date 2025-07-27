@@ -1,30 +1,36 @@
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/core/components/ui/button';
 import { Input } from '@/core/components/ui/input';
 import { Label } from '@/core/components/ui/label';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/core/components/ui/tooltip';
 import { ElectronEventEnum } from '@/electron/data/events';
+import { useNotification } from '@/shared/hooks/useNotification';
 import { useUpdateDirectoryTree } from '@/shared/hooks/useUpdateDirectoryTree';
 import { useUserSettingsStore } from '@/stores/useUserStore';
-import { useTranslation } from 'react-i18next';
 
 export const Folder: React.FC = () => {
   const updateDirectoryTree = useUpdateDirectoryTree();
   const { directoryPath, setDirectoryPath } = useUserSettingsStore();
   const { t } = useTranslation('settings');
+  const { showErrorNotification } = useNotification();
 
   const handleOpenDirectory = () =>
     window.ipcRenderer.invoke(ElectronEventEnum.OpenDirectory, directoryPath);
 
   const handleClickDirectoryPicker = async () => {
-    const directoryPath: string = await window.ipcRenderer.invoke(
-      ElectronEventEnum.SelectDirectory,
-    );
-    if (!directoryPath) return;
+    try {
+      const directoryPath: string = await window.ipcRenderer.invoke(
+        ElectronEventEnum.SelectDirectory,
+      );
+      if (!directoryPath) return;
 
-    setDirectoryPath(directoryPath);
-    await window.ipcRenderer.invoke(ElectronEventEnum.SetDirectory, directoryPath);
+      setDirectoryPath(directoryPath);
+      await window.ipcRenderer.invoke(ElectronEventEnum.SetDirectory, directoryPath);
 
-    await updateDirectoryTree(directoryPath);
+      await updateDirectoryTree(directoryPath);
+    } catch (e) {
+      showErrorNotification(e);
+    }
   };
 
   return (

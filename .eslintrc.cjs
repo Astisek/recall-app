@@ -7,33 +7,47 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
     'plugin:react/recommended',
+    'plugin:import/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'prettier'],
   rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'prettier/prettier': 'error',
-    "arrow-body-style": "warn",
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-key": "error",
-    "react/prop-types": "off",
-    "no-case-declarations": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
+    'arrow-body-style': 'warn',
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-key': 'error',
+    'react/prop-types': 'off',
+    'no-case-declarations': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
       {
-        "args": "all",
-        "argsIgnorePattern": "^_",
-        "caughtErrors": "all",
-        "caughtErrorsIgnorePattern": "^_",
-        "destructuredArrayIgnorePattern": "^_",
-        "varsIgnorePattern": "^_",
-        "ignoreRestSiblings": true
-      }
+        args: 'all',
+        argsIgnorePattern: '^_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_',
+        destructuredArrayIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+      },
     ],
-    "object-shorthand": "warn"
+    'object-shorthand': 'warn',
+    'import/no-unresolved': 'off',
+    "import/no-named-as-default-member": 'off',
+    'import/order': [
+      'error',
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          ['parent', 'sibling', 'index'],
+          'object',
+          'type',
+        ],
+        alphabetize: { order: 'asc', caseInsensitive: true },
+      },
+    ],
   },
 };

@@ -1,5 +1,10 @@
 export const ruShared = {
-  // item_one: '{{count}} предмет',
-  // item_few: '{{count}} предмета',
-  // item_many: '{{count}} предметов',
+  'header.url': 'URL',
+  'header.search': 'Поиск',
+  'header.searchInputPlaceholder': 'Введите URL (youtube)...',
+  'header.add': 'Добавить',
+
+  'selectMedia.selectDirectory': 'Выбрать папка',
+  'selectMedia.addMedia': 'Скачать',
+  'selectMedia.selectedDirectory': 'Выбранная папка:',
 };

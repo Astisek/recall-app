@@ -1,6 +1,6 @@
+import { HTMLProps, useEffect, useState } from 'react';
 import { Skeleton } from '@/core/components/ui/skeleton';
 import { preloadImage } from '@/shared/utils/preloadImage';
-import { HTMLProps, useEffect, useState } from 'react';
 
 export const Image: React.FC<HTMLProps<HTMLImageElement>> = ({ src = '', className, ...props }) => {
   const [isLoading, setIsLoading] = useState(true);

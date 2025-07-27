@@ -1,5 +1,5 @@
-import { ElectronEventEnum, ElectronNotificationEnum } from '../data/events';
 import { BrowserWindow } from 'electron';
+import { ElectronEventEnum, ElectronNotificationEnum } from '../data/events';
 
 export class Notification {
   private win?: BrowserWindow;
@@ -11,11 +11,7 @@ export class Notification {
 
   showError = (e: unknown) => {
     if (e instanceof Error) {
-      return this.win?.webContents.send(
-        ElectronEventEnum.SendNotification,
-        ElectronNotificationEnum.Error,
-        e.message,
-      );
+      throw e.message;
     }
   };
 }

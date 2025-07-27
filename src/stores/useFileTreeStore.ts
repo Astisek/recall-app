@@ -1,6 +1,6 @@
+import { create } from 'zustand';
 import { IFileTreeNode } from '@/electron/models/fileTree';
 import { filterOnlyDirectories } from '@/shared/utils/filterOnlyDirectories';
-import { create } from 'zustand';
 
 interface IFileTreeStore {
   tree: IFileTreeNode[];

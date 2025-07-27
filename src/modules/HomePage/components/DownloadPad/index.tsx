@@ -1,11 +1,11 @@
-import { Button } from '@/core/components/ui/button';
-import { Input } from '@/core/components/ui/input';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PasteIcon from '@/assets/icons/paste.svg?react';
-import { useState } from 'react';
+import { Button } from '@/core/components/ui/button';
+import { Input } from '@/core/components/ui/input';
 import { MediaSelectModal } from '@/modules/HomePage/components/MediaSelectModal';
-import { detectMediaUrl } from '@/modules/HomePage/utils/detectMediaUrl';
 import { IUrlData } from '@/modules/HomePage/models';
+import { detectMediaUrl } from '@/modules/HomePage/utils/detectMediaUrl';
 import { useNotification } from '@/shared/hooks/useNotification';
 import { NotificationCategoryEnum } from '@/shared/models/notification';
 import { useUserSettingsStore } from '@/stores/useUserStore';

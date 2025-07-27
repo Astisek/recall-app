@@ -1,8 +1,8 @@
+import { Folder, FolderOpen } from 'lucide-react';
+import { useState } from 'react';
 import { cn } from '@/core/lib/utils';
 import { IFileTreeNode } from '@/electron/models/fileTree';
 import { useMediaSelectStore } from '@/stores/useMediaSelectStore';
-import { Folder, FolderOpen } from 'lucide-react';
-import { useState } from 'react';
 
 interface DirectoryNodeProps {
   node: IFileTreeNode;

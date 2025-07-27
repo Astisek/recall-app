@@ -1,7 +1,7 @@
+import fs from 'fs/promises';
+import path from 'path';
 import { app } from 'electron';
 import { name } from '../../package.json';
-import path from 'path';
-import fs from 'fs/promises';
 
 class Temp {
   private appTempPath = path.join(app.getPath('temp'), name);

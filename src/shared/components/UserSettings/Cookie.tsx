@@ -1,3 +1,6 @@
+import { Info } from 'lucide-react';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/core/components/ui/button';
 import { Input } from '@/core/components/ui/input';
 import { Label } from '@/core/components/ui/label';
@@ -11,29 +14,30 @@ import { ElectronEventEnum } from '@/electron/data/events';
 import { useNotification } from '@/shared/hooks/useNotification';
 import { NotificationCategoryEnum } from '@/shared/models/notification';
 import { useUserSettingsStore } from '@/stores/useUserStore';
-import { Info } from 'lucide-react';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 export const Cookie: React.FC = () => {
   const { cookie, setCookie } = useUserSettingsStore();
   const { t: settingsT } = useTranslation('settings');
   const { t: notificationT } = useTranslation('notification');
-  const { showNotification } = useNotification();
+  const { showNotification, showErrorNotification } = useNotification();
 
   const [inputCookie, setInputCookie] = useState(cookie);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSave = async () => {
-    setIsLoading(true);
-    setCookie(inputCookie);
-    await window.ipcRenderer.invoke(ElectronEventEnum.YoutubeSetCookie, inputCookie);
+    try {
+      setIsLoading(true);
+      setCookie(inputCookie);
+      await window.ipcRenderer.invoke(ElectronEventEnum.YoutubeSetCookie, inputCookie);
 
-    showNotification({
-      title: notificationT('settings.cookieSaved'),
-      category: NotificationCategoryEnum.Success,
-    });
-    setIsLoading(false);
+      showNotification({
+        title: notificationT('settings.cookieSaved'),
+        category: NotificationCategoryEnum.Success,
+      });
+      setIsLoading(false);
+    } catch (e) {
+      showErrorNotification(e);
+    }
   };
 
   return (

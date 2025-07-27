@@ -1,13 +1,13 @@
-import { Card, CardFooter, CardHeader, CardTitle } from '@/core/components/ui/card';
+import { Folder, Music } from 'lucide-react';
+import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router';
 import s from './styles.module.css';
+import { Card, CardFooter, CardHeader, CardTitle } from '@/core/components/ui/card';
 import { cn } from '@/core/lib/utils';
 import { IFileTreeNode } from '@/electron/models/fileTree';
-import { useCallback, useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router';
-import { parseFileTree } from '@/modules/HomePage/utils/parseFileTree';
 import { CardActions } from '@/modules/HomePage/components/ItemCard/CardActions';
-import { Folder, Music } from 'lucide-react';
+import { parseFileTree } from '@/modules/HomePage/utils/parseFileTree';
 
 interface ItemCardProps {
   treeItem: IFileTreeNode;

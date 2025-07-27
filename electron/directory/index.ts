@@ -1,11 +1,11 @@
-import { userSettingsStore } from '../store/userSettings.store';
-import { ElectronEventEnum } from '../data/events';
-import { BrowserWindow, dialog, ipcMain, shell } from 'electron';
-import { readDirectory } from '../utils/readDirectory';
-import { IFileTreeNode } from '../models/fileTree';
 import fs from 'fs/promises';
 import path from 'path';
+import { BrowserWindow, dialog, ipcMain, shell } from 'electron';
+import { ElectronEventEnum } from '../data/events';
 import { notifications } from '../main';
+import { IFileTreeNode } from '../models/fileTree';
+import { userSettingsStore } from '../store/userSettings.store';
+import { readDirectory } from '../utils/readDirectory';
 
 export const init = () => {
   ipcMain.handle(ElectronEventEnum.SelectDirectory, async () => {

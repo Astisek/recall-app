@@ -1,9 +1,10 @@
 export enum LanguageEnum {
-  En = 'EN',
-  Ru = 'RU',
+  En = 'en',
+  Ru = 'ru',
 }
 
 export enum ThemeEnum {
-  Light = 'Light',
-  Dark = 'Dark',
+  Light = 'light',
+  Dark = 'dark',
+  System = 'system',
 }

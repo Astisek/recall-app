@@ -1,3 +1,7 @@
+import { last } from 'lodash';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router';
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -14,10 +18,6 @@ import {
   DropdownMenuTrigger,
 } from '@/core/components/ui/dropdown-menu';
 import { routerLinks } from '@/core/data/router';
-import { last } from 'lodash';
-import { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
 
 interface DirectoryBreadcrumbsProps {
   pathnameDirectories: string[];

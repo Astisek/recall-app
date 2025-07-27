@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint --fix src/**/*.{ts,tsx} electron/**/*.ts --report-unused-disable-directives --max-warnings 0 ",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -23,11 +23,11 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "electron-store": "^10.1.0",
+    "framer-motion": "^12.23.9",
     "i18next": "^25.3.0",
     "i18next-browser-languagedetector": "^8.2.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.525.0",
-    "next-themes": "^0.4.6",
     "node-id3": "^0.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -54,6 +54,7 @@
     "electron-builder": "^24.13.3",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^4.6.0",

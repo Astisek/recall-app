@@ -1,6 +1,6 @@
-import { BinariesEnum } from '../models/binaries';
 import os from 'os';
 import path from 'path';
+import { BinariesEnum } from '../models/binaries';
 
 const binPath = import.meta.env.PROD
   ? path.join(process.cwd(), 'resources', 'app.asar.unpacked', 'bin')

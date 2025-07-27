@@ -1,8 +1,8 @@
+import { useCallback, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ElectronEventEnum, ElectronNotificationEnum } from '@/electron/data/events';
 import { useNotification } from '@/shared/hooks/useNotification';
 import { NotificationCategoryEnum, NotificationVariantEnum } from '@/shared/models/notification';
-import { useCallback, useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
 
 export const NotificationControl: React.FC = () => {
   const { showNotification, removeNotification } = useNotification();

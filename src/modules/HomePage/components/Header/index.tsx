@@ -1,9 +1,9 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/core/components/ui/tabs';
-import { HeaderTabsEnum } from '@/core/data/headerTabs';
 import { useTranslation } from 'react-i18next';
 import LogoIcon from '@/assets/icons/logo.svg?react';
-import { UserSettings } from '@/shared/components/UserSettings';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/core/components/ui/tabs';
+import { HeaderTabsEnum } from '@/core/data/headerTabs';
 import { DownloadPad } from '@/modules/HomePage/components/DownloadPad';
+import { UserSettings } from '@/shared/components/UserSettings';
 
 export const Header: React.FC = () => {
   const { t } = useTranslation('shared');

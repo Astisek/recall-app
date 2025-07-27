@@ -1,13 +1,14 @@
-import { Header } from '@/modules/HomePage/components/Header';
-import { ScrollArea } from '@/core/components/ui/scroll-area';
-import { FileList } from '@/modules/HomePage/components/FileList';
-import { useFileTreeStore } from '@/stores/useFileTreeStore';
-import { useMemo } from 'react';
-import { useLocation } from 'react-router';
-import { IFileTreeNode } from '@/electron/models/fileTree';
-import { parseFilesUrl } from '@/modules/HomePage/utils/parseFilesUrl';
-import { FileListHeader } from '@/modules/HomePage/components/FileListHeader';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Fragment, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router';
+import { ScrollArea } from '@/core/components/ui/scroll-area';
+import { IFileTreeNode } from '@/electron/models/fileTree';
+import { FileList } from '@/modules/HomePage/components/FileList';
+import { FileListHeader } from '@/modules/HomePage/components/FileListHeader';
+import { Header } from '@/modules/HomePage/components/Header';
+import { parseFilesUrl } from '@/modules/HomePage/utils/parseFilesUrl';
+import { useFileTreeStore } from '@/stores/useFileTreeStore';
 import { useUserSettingsStore } from '@/stores/useUserStore';
 
 export const HomePage: React.FC = () => {
@@ -39,19 +40,29 @@ export const HomePage: React.FC = () => {
       <Header />
 
       <FileListHeader pathnameDirectories={pathnameDirectories} />
-
-      {currentTree.length ? (
-        <ScrollArea className="flex-1 h-1">
-          <FileList list={currentTree} />
-        </ScrollArea>
-      ) : (
-        <div className="w-full h-full flex items-center justify-center">
-          <p className="text-muted-foreground text-lg">
-            {t(settingsIsCorrect() ? 'list.placeholder' : 'list.selectDirectory')}
-          </p>
-        </div>
-      )}
-
+      <AnimatePresence mode="wait">
+        <Fragment key={currentTree.length ? location.pathname : 'empty'}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1 }}
+            className="flex-1 h-1"
+          >
+            {currentTree.length ? (
+              <ScrollArea className="h-full">
+                <FileList list={currentTree} />
+              </ScrollArea>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <p className="text-muted-foreground text-lg">
+                  {t(settingsIsCorrect() ? 'list.placeholder' : 'list.selectDirectory')}
+                </p>
+              </div>
+            )}
+          </motion.div>
+        </Fragment>
+      </AnimatePresence>
       <div className="h-2"></div>
     </div>
   );
