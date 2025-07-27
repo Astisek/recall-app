@@ -3,10 +3,10 @@ import { Fragment, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { ScrollArea } from '@/core/components/ui/scroll-area';
-import { IFileTreeNode } from '@/electron/models/fileTree';
 import { FileList } from '@/modules/HomePage/components/FileList';
 import { FileListHeader } from '@/modules/HomePage/components/FileListHeader';
 import { Header } from '@/modules/HomePage/components/Header';
+import { getTreeByPath } from '@/modules/HomePage/utils/getTreeByPath';
 import { parseFilesUrl } from '@/modules/HomePage/utils/parseFilesUrl';
 import { useFileTreeStore } from '@/stores/useFileTreeStore';
 import { useUserSettingsStore } from '@/stores/useUserStore';
@@ -20,18 +20,7 @@ export const HomePage: React.FC = () => {
   const pathnameDirectories = useMemo(() => parseFilesUrl(location.pathname), [location.pathname]);
 
   const currentTree = useMemo(
-    () =>
-      (
-        structuredClone(pathnameDirectories).reduce<IFileTreeNode[] | undefined>(
-          (acc, item) => acc?.find(({ name }) => name === item)?.children,
-          tree,
-        ) ?? []
-      ).sort((prev, next) => {
-        if (prev.isDirectory !== next.isDirectory) {
-          return prev.isDirectory ? -1 : 1;
-        }
-        return next.name.lastIndexOf(prev.name);
-      }),
+    () => getTreeByPath(tree, pathnameDirectories),
     [pathnameDirectories, tree],
   );
 
