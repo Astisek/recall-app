@@ -27,7 +27,17 @@ export const ItemCard: React.FC<ItemCardProps> = ({ treeItem }) => {
 
   const { directories, items } = useMemo(() => parseFileTree(children), [children]);
 
-  const itemsText = `${t('itemCard.tag', { count: directories })}, ${t('itemCard.item', { count: items })}`;
+  const itemsText = useMemo(() => {
+    const textsData: string[] = [];
+    if (directories) {
+      textsData.push(t('itemCard.tag', { count: directories }));
+    }
+    if (items) {
+      textsData.push(t('itemCard.item', { count: items }));
+    }
+
+    return textsData.join(', ');
+  }, [directories, items, t]);
 
   return (
     <Card
@@ -48,7 +58,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({ treeItem }) => {
       </CardHeader>
 
       <CardFooter>
-        <p className="text-secondary">{isDirectory ? itemsText : ''}</p>
+        <p className="text-secondary">{itemsText}</p>
       </CardFooter>
 
       <CardActions fileNode={treeItem} />

@@ -9,7 +9,7 @@ import { useUserSettingsStore } from '@/stores/useUserStore';
 
 export const LoadStores = () => {
   const updateDirectoryTree = useUpdateDirectoryTree();
-  const { setDirectoryPath, setCookie } = useUserSettingsStore();
+  const { setDirectoryPath, setCookie, setRootDirectoryName } = useUserSettingsStore();
   const { showNotification, showErrorNotification } = useNotification();
   const { t } = useTranslation('notification');
 
@@ -17,7 +17,7 @@ export const LoadStores = () => {
     (async () => {
       try {
         const {
-          userSettings: { directoryPath, cookie },
+          userSettings: { directoryPath, cookie, rootDirectoryPath },
         } = (await window.ipcRenderer.invoke(ElectronEventEnum.GetStores)) as IElectronClientStore;
 
         if (!directoryPath) {
@@ -28,6 +28,7 @@ export const LoadStores = () => {
           });
         }
 
+        setRootDirectoryName(rootDirectoryPath);
         setDirectoryPath(directoryPath);
         setCookie(cookie);
 

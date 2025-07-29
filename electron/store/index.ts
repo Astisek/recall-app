@@ -4,7 +4,9 @@ import { userSettingsStore } from './userSettings.store';
 import { ElectronEventEnum } from '../data/events';
 import { IElectronClientStore, IElectronStore } from '../models/store';
 
-export const store = new Store<IElectronStore>();
+export const store = new Store<IElectronStore>({
+  name: import.meta.env.PROD ? 'config' : 'config.dev',
+});
 
 export const init = () => {
   ipcMain.handle(
@@ -13,6 +15,7 @@ export const init = () => {
       userSettings: {
         directoryPath: userSettingsStore.getDirectoryPath(),
         cookie: userSettingsStore.getYoutubeCookie(),
+        rootDirectoryPath: userSettingsStore.getRootDirectoryPath(),
       },
     }),
   );

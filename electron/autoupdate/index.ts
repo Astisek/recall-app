@@ -8,15 +8,22 @@ export class AppAutoUpdater {
   constructor() {
     autoUpdater.autoDownload = true;
     autoUpdater.autoInstallOnAppQuit = true;
-    autoUpdater.checkForUpdates();
-    this.checkUpdated();
+    this.init();
   }
+
+  private init = async () => {
+    await autoUpdater.checkForUpdates();
+    this.checkUpdated();
+  };
 
   private checkUpdated = () => {
     const currentVersion = app.getVersion();
-    const prevVersion = appStore.getAppVer();
+    const prevVersion = appStore.getAppVer() || currentVersion;
 
-    if (prevVersion && currentVersion !== prevVersion) {
+    console.log('prevVersion: ', prevVersion);
+    console.log('currentVersion: ', currentVersion);
+
+    if (currentVersion !== prevVersion) {
       notifications.sendNotification(ElectronNotificationEnum.AppUpdated, currentVersion);
     }
 

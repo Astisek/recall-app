@@ -54,7 +54,7 @@ export const MediaSelectModal: React.FC<MediaSelectModalProps> = ({ onClose, url
   };
 
   return (
-    <Drawer open onOpenChange={onClose}>
+    <Drawer open onOpenChange={isDownloading ? undefined : onClose}>
       <DrawerContent>
         <div className="flex p-4 gap-6 justify-between">
           <VideoInfo isLoading={isLoading} videoInfo={videoInfo} />

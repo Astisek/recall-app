@@ -83,14 +83,8 @@ export const init = () => {
       } catch (e) {
         notifications.showError(e);
       } finally {
-        notifications.sendNotification(
-          ElectronNotificationEnum.RemoveNotification,
-          ElectronNotificationEnum.MediaProcessing,
-        );
-        notifications.sendNotification(
-          ElectronNotificationEnum.RemoveNotification,
-          ElectronNotificationEnum.MediaDownloading,
-        );
+        notifications.removeNotification(ElectronNotificationEnum.MediaProcessing);
+        notifications.removeNotification(ElectronNotificationEnum.MediaDownloading);
       }
     },
   );

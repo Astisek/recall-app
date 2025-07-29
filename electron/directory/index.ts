@@ -1,5 +1,5 @@
 import fs from 'fs/promises';
-import path from 'path';
+import path, { basename } from 'path';
 import { BrowserWindow, dialog, ipcMain, shell } from 'electron';
 import { ElectronEventEnum } from '../data/events';
 import { notifications } from '../main';
@@ -14,12 +14,12 @@ export const init = () => {
     });
 
     if (result.canceled || result.filePaths.length === 0) {
-      return null;
+      return [null, null];
     }
 
     const selectedDirectory = result.filePaths[0];
 
-    return selectedDirectory;
+    return [selectedDirectory, basename(selectedDirectory)];
   });
 
   ipcMain.handle(ElectronEventEnum.ParseDirectoryTree, async (_, path: string) => {
@@ -34,6 +34,7 @@ export const init = () => {
 
   ipcMain.handle(ElectronEventEnum.SetDirectory, (_, path: string) => {
     userSettingsStore.setDirectoryPath(path);
+    userSettingsStore.setRootDirectoryPath(basename(path));
   });
 
   ipcMain.handle(ElectronEventEnum.RemoveItem, async (_, tree: IFileTreeNode) => {

@@ -6,7 +6,6 @@ export const ruMainPage = {
   'itemCard.tag_few': '{{count}} папки',
   'itemCard.tag_many': '{{count}} папок',
 
-  'list.root': 'Корневая директория',
   'list.placeholder': 'Здесь пока ничего нет',
   'list.selectDirectory': 'Директория не выбрана. Пожалуйста, выберите её в настройках.',
 

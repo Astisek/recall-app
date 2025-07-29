@@ -8,4 +8,7 @@ export const userSettingsStore = {
 
   getYoutubeCookie: () => store.get('userSettings:cookie') || '',
   setYoutubeCookie: (cookie: string) => store.set('userSettings:cookie', cookie),
+
+  getRootDirectoryPath: () => store.get('userSettings:rootDirectoryName') || '',
+  setRootDirectoryPath: (name: string) => store.set('userSettings:rootDirectoryName', name),
 };

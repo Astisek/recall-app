@@ -1,6 +1,5 @@
 import { last } from 'lodash';
 import { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import {
   Breadcrumb,
@@ -18,6 +17,7 @@ import {
   DropdownMenuTrigger,
 } from '@/core/components/ui/dropdown-menu';
 import { routerLinks } from '@/core/data/router';
+import { useUserSettingsStore } from '@/stores/useUserStore';
 
 interface DirectoryBreadcrumbsProps {
   pathnameDirectories: string[];
@@ -26,7 +26,7 @@ interface DirectoryBreadcrumbsProps {
 export const DirectoryBreadcrumbs: React.FC<DirectoryBreadcrumbsProps> = ({
   pathnameDirectories,
 }) => {
-  const { t } = useTranslation('mainPage');
+  const { rootDirectoryName } = useUserSettingsStore();
 
   const { currentLink, hiddenElements, homeLink, prevLink } = useMemo(() => {
     const items = pathnameDirectories.reduce<{ link: string; title: string }[]>(
@@ -35,7 +35,7 @@ export const DirectoryBreadcrumbs: React.FC<DirectoryBreadcrumbsProps> = ({
 
         return acc;
       },
-      [{ link: routerLinks.home(), title: t('list.root') }],
+      [{ link: routerLinks.home(), title: rootDirectoryName }],
     );
 
     return {
@@ -44,7 +44,7 @@ export const DirectoryBreadcrumbs: React.FC<DirectoryBreadcrumbsProps> = ({
       homeLink: items.shift(),
       hiddenElements: items,
     };
-  }, [pathnameDirectories, t]);
+  }, [pathnameDirectories, rootDirectoryName]);
 
   return (
     <Breadcrumb>

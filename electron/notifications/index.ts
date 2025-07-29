@@ -14,4 +14,7 @@ export class Notification {
       throw e.message;
     }
   };
+
+  removeNotification = (event: ElectronNotificationEnum) =>
+    this.sendNotification(ElectronNotificationEnum.RemoveNotification, event);
 }

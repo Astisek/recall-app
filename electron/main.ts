@@ -37,7 +37,9 @@ function createWindow() {
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', new Date().toLocaleString());
   });
-  win.removeMenu();
+  if (import.meta.env.PROD) {
+    win.removeMenu();
+  }
 
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL);

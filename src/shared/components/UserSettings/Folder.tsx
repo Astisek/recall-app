@@ -10,7 +10,7 @@ import { useUserSettingsStore } from '@/stores/useUserStore';
 
 export const Folder: React.FC = () => {
   const updateDirectoryTree = useUpdateDirectoryTree();
-  const { directoryPath, setDirectoryPath } = useUserSettingsStore();
+  const { directoryPath, setDirectoryPath, setRootDirectoryName } = useUserSettingsStore();
   const { t } = useTranslation('settings');
   const { showErrorNotification } = useNotification();
 
@@ -19,12 +19,13 @@ export const Folder: React.FC = () => {
 
   const handleClickDirectoryPicker = async () => {
     try {
-      const directoryPath: string = await window.ipcRenderer.invoke(
+      const [directoryPath, rootDirectoryName] = await window.ipcRenderer.invoke(
         ElectronEventEnum.SelectDirectory,
       );
       if (!directoryPath) return;
 
       setDirectoryPath(directoryPath);
+      setRootDirectoryName(rootDirectoryName);
       await window.ipcRenderer.invoke(ElectronEventEnum.SetDirectory, directoryPath);
 
       await updateDirectoryTree(directoryPath);

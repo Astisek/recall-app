@@ -4,7 +4,6 @@ export const enMainPage = {
   'itemCard.tag_one': '{{count}} playlist',
   'itemCard.tag_other': '{{count}} playlists',
 
-  'list.root': 'Root directory',
   'list.placeholder': "There's nothing here yet",
   'list.selectDirectory': 'No directory selected. Please choose one in the settings.',
 
