@@ -5,10 +5,7 @@
 
 **Recall** is a cross-platform music downloader that lets you save music from **YouTube** (**Spotify** and **SoundCloud** coming soon.)
 
-<figure class="video_container">
-  <iframe src="./assets/demo.mp4" frameborder="0" allowfullscreen="true"> 
-  </iframe>
-</figure>
+![Video](./assets/demo.mp4)
 
 Whether you're building a music library or just want offline access to your favorite songs, Recall simplifies the process with smart organization and an easy-to-use interface.
 
