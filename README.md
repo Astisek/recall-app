@@ -34,7 +34,7 @@ Go to [release page](https://github.com/Astisek/recall-app/releases/) and downlo
 ## FAQ
 
 **Q:** The server responded with a non 2xx status code
-**A:** Set or reset the [cookies in the settings]().
+**A:** Set or reset the [cookies in the settings](#how-to-set-cookie).
 
 ## For v1.0
 
