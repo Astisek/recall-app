@@ -43,6 +43,7 @@ Go to [release page](https://github.com/Astisek/recall-app/releases/) and downlo
 | Download music from Spotify                    |         |
 | Save to directory                              | ✅      |
 | Directory Sync between devices (Authorization) |         |
+| Drag and drop for new files                    |         |
 
 ## Dev mode
 
